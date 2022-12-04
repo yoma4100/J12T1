@@ -44,7 +44,15 @@ public class ManagerTest {
     }
 
     @Test
-    public void shouldFindCellByName() {
+    public void shouldNotFindCellByName() {
+        Product[] expected = {};
+        Product[] actual = manager.searchBy("Prfkjsoduct1");
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldFindOneCellByName() {
         Product[] expected = {product6};
         Product[] actual = manager.searchBy("@");
 
@@ -52,9 +60,9 @@ public class ManagerTest {
     }
 
     @Test
-    public void shouldNotFindCellByName() {
-        Product[] expected = {};
-        Product[] actual = manager.searchBy("Prfkjsoduct1");
+    public void shouldFindTwoCellsByName() {
+        Product[] expected = {product1, product2};
+        Product[] actual = manager.searchBy("Twin");
 
         Assertions.assertArrayEquals(expected, actual);
     }

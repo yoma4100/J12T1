@@ -19,21 +19,27 @@ public class Manager {
     }
 
     public Product[] searchBy(String text) {
-        Product[] result = new Product[0];
+        int size = 0;
         for (Product product : repo.findAll()) {
-            if (matches(product, text)) {
-                result = new Product[result.length + 1];
-                result[result.length - 1] = product;
+            if (product.getName().equals(text)) {
+                size++;
             }
         }
-        return result;
-    }
 
-    public boolean matches(Product product, String search) {
-        if (product.getName().contains(search)) {
-            return true;
-        } else {
-            return false;
+        Product[] result = new Product[0];
+        Product[] tmp = new Product[size];
+        int copyToIndex = 0;
+
+        for (Product product : repo.findAll()) {
+            if (product.getName().equals(text)) {
+                tmp[copyToIndex] = product;
+                copyToIndex++;
+            }
         }
+
+        if (size != 0) {
+            result = tmp;
+        }
+        return result;
     }
 }
